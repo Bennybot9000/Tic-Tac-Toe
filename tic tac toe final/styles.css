@@ -1,0 +1,122 @@
+/*styling the head*/
+#title {
+  font-family: monospace, 'Courier New', Courier;
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
+}
+
+#title2 {
+  font-family: monospace, 'Courier New', Courier;
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
+}
+
+/*create the necessary variables*/
+:root {
+  --cell-size: 100px;
+  --mark-size: calc(var(--cell-size) * .9);
+}
+
+body {
+  margin: 0;
+}
+
+/* styling the cells*/
+.grid {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(3, auto);
+  position: absolute;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.cell.x,
+.cell.circle {
+  cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before {
+  background-color: black;
+}
+
+/*styling the xs and os*/
+
+.cell.x::before,
+.cell.x::after,
+.grid.x .cell:not(.x):not(.circle):hover::before,
+.grid.x .cell:not(.x):not(.circle):hover::after {
+  content: '';
+  position: absolute;
+  width: calc(var(--mark-size) * .15);
+  height: var(--mark-size);
+}
+
+.cell.x::before,
+.grid.x .cell:not(.x):not(.circle):hover::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after,
+.grid.x .cell:not(.x):not(.circle):hover::after {
+  transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.grid.circle .cell:not(.x):not(.circle):hover::before,
+.grid.circle .cell:not(.x):not(.circle):hover::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.circle::before,
+.grid.circle .cell:not(.x):not(.circle):hover::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+}
+
+.cell.circle::after,
+.grid.circle .cell:not(.x):not(.circle):hover::after {
+  width: calc(var(--mark-size) * .7);
+  height: calc(var(--mark-size) * .7);
+  background-color: white;
+}
+
+/*styling the winning message*/
+.winning-message {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .9);
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 6rem;
+}
+
+.winning-message.show {
+  display: flex;
+}
